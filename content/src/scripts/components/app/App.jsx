@@ -51,7 +51,7 @@ class App extends Component {
     let splitUpText = text.split(/=>(.+)/);
     let splitUpTextWithoutLast = splitUpText.slice(0, splitUpText.length - 1);
 
-    if (splitUpTextWithoutLast[0] === "") {
+    if (splitUpTextWithoutLast[0] !== "") {
       this.props.setVariable(splitUpTextWithoutLast);
     } else {
       this.props.getVariable(splitUpTextWithoutLast);
