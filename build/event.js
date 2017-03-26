@@ -1320,25 +1320,30 @@
 	});
 	
 	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : chrome.storage.sync.get(null, function () {});
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ["anything"];
 	  var action = arguments[1];
 	
-	  var key = void 0;
+	  var storageKey = void 0;
 	  switch (action.type) {
-	    case "GET_VARIABLE":
-	      key = action.variableInfo[1];
-	
-	      // chrome.storage.sync.get(key);
-	
-	      // return chrome.storage.sync.get(null);
-	      return state;
+	    // case "GET_VARIABLE":
+	    //   storageKey = action.variableInfo[1];
+	    //
+	    //
+	    //   chrome.storage.sync.get(null, function(stuff) {
+	    //     // anything on this line
+	    //     console.log(stuff);
+	    //   });
+	    //
+	    //   return state;
 	    case "SET_VARIABLE":
-	      key = action.variableInfo[0];
-	      var value = action.variableInfo[1];
+	      storageKey = action.variableInfo[1];
+	      var storageValue = action.variableInfo[0];
 	
-	      chrome.storage.sync.set({ key: value }, function () {});
+	      var obj = {};
+	      obj[storageKey] = storageValue;
 	
-	      // return chrome.storage.sync.get(null);
+	      chrome.storage.sync.set(obj, function () {});
+	
 	      return state;
 	    default:
 	      return state;

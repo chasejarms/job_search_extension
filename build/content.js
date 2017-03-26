@@ -23249,9 +23249,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// import { Store } from 'react-chrome-redux';
-	
-	
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 	
@@ -23260,62 +23257,73 @@
 	
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
-	    _this.addInputEventListeners = _this.addInputEventListeners.bind(_this);
 	    _this.sendCorrectAction = _this.sendCorrectAction.bind(_this);
 	    _this._isArrowPresent = _this._isArrowPresent.bind(_this);
+	    _this._isCorrectInputType = _this._isCorrectInputType.bind(_this);
+	    _this.handleTabEvent = _this.handleTabEvent.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.addInputEventListeners();
+	      document.addEventListener('keydown', this.handleTabEvent);
+	
+	      var indeedPopup = document.getElementsByClassName('indeed-apply-popup');
+	
+	      // if (indeedPopup.length > 0) {
+	      //   indeedPopup.forEach(popUp => {
+	      //     document.addEventListener('keydown', this.handleTabEvent);
+	      //   });
+	      // }
 	    }
 	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      console.log(this.props);
-	    }
-	  }, {
-	    key: 'addInputEventListeners',
-	    value: function addInputEventListeners() {
-	      var _this2 = this;
+	    key: 'handleTabEvent',
+	    value: function handleTabEvent(e) {
+	      var key = e.which || e.keyCode;
+	      if (key === 9 && this._isArrowPresent(e.target.value)) {
 	
-	      var documentInputs = document.querySelectorAll('input');
-	
-	      documentInputs.forEach(function (input) {
-	
-	        switch (input.type) {
-	          case "text":
-	          case "email":
-	          case "number":
-	          case "search":
-	          case "tel":
-	          case "time":
-	            input.addEventListener('keydown', function (e) {
-	              var key = e.which || e.keyCode;
-	              var phrase = e.target.value;
-	
-	              if (key === 9 && _this2._isArrowPresent(phrase)) {
-	                _this2.sendCorrectAction(e.target.value);
-	              }
-	            });
-	            break;
-	          default:
-	            break;
+	        if (this._isCorrectInputType(e.target)) {
+	          this.sendCorrectAction(e.target.value, e);
 	        }
-	      });
+	      }
+	    }
+	  }, {
+	    key: '_isCorrectInputType',
+	    value: function _isCorrectInputType(target) {
+	      switch (target.type) {
+	        case "text":
+	        case "email":
+	        case "number":
+	        case "search":
+	        case "tel":
+	        case "time":
+	          return true;
+	        default:
+	          return false;
+	      }
 	    }
 	  }, {
 	    key: 'sendCorrectAction',
-	    value: function sendCorrectAction(text) {
+	    value: function sendCorrectAction(text, e) {
 	      var splitUpText = text.split(/=>(.+)/);
 	      var splitUpTextWithoutLast = splitUpText.slice(0, splitUpText.length - 1);
 	
 	      if (splitUpTextWithoutLast[0] !== "") {
 	        this.props.setVariable(splitUpTextWithoutLast);
+	        e.target.value = splitUpTextWithoutLast[0];
 	      } else {
-	        this.props.getVariable(splitUpTextWithoutLast);
+	        var storageKey = [splitUpTextWithoutLast[1]];
+	
+	        chrome.storage.sync.get(storageKey, function (objMatches) {
+	          if (objMatches[storageKey]) {
+	            e.target.value = objMatches[storageKey];
+	          }
+	        });
+	
+	        chrome.storage.sync.get(null, function (stuff) {
+	          console.log(stuff);
+	        });
 	      }
 	    }
 	  }, {
