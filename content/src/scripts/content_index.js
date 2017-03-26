@@ -2,18 +2,31 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {Store} from 'react-chrome-redux';
+import App from './components/app/app';
 
-import App from './components/app/App';
+import AppContainer from './components/app/app_container';
 
-const proxyStore = new Store({portName: 'jobbify'});
+const proxyStore = new Store({
+  portName: 'jobbify'
+});
 
 const anchor = document.createElement('div');
-anchor.id = 'rcr-anchor';
+anchor.id = 'jobbify-content-anchor';
 
 document.body.insertBefore(anchor, document.body.childNodes[0]);
+
+console.log(proxyStore);
 
 render(
   <Provider store={proxyStore}>
     <App/>
   </Provider>
-  , document.getElementById('rcr-anchor'));
+  , document.getElementById('jobbify-content-anchor'));
+
+
+
+
+
+
+
+//

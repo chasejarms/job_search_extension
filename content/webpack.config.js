@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
 
   entry: [
-    './content/src/scripts/index.js'
+    './content/src/scripts/content_index.js'
   ],
 
   output: {
@@ -29,5 +29,7 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+
+  devtool: 'source-map'
 };

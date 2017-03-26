@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        Click Count: {this.props.count}
+        Just changed this so please change :)
       </div>
     );
   }

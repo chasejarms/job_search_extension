@@ -1,9 +1,9 @@
 import {createStore} from 'redux';
-import rootReducer from './reducers';
+import RootReducer from './reducers';
 
 import {wrapStore} from 'react-chrome-redux';
 
-const store = createStore(rootReducer, {});
+const store = createStore(RootReducer, {});
 
 wrapStore(store, {
   portName: 'jobbify'
