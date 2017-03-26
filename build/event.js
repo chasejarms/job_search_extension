@@ -1299,36 +1299,39 @@
 	
 	var _redux = __webpack_require__(2);
 	
-	var _count = __webpack_require__(25);
+	var _variables = __webpack_require__(25);
 	
-	var _count2 = _interopRequireDefault(_count);
+	var _variables2 = _interopRequireDefault(_variables);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _redux.combineReducers)({
-	  count: _count2.default
+	  variables: _variables2.default
 	});
 
 /***/ },
 /* 25 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var initialState = 0;
 	
 	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case 'ADD_COUNT':
-	      return state + (action.payload || 1);
+	    case "GET_VARIABLE":
+	      console.log("get is the action");
+	      return ["get is working"];
+	    case "SET_VARIABLE":
+	      console.log("set is the action");
+	      return ["set is working"];
 	    default:
-	      return state;
+	      return ["" + action.variableInfo];
 	  }
 	};
 

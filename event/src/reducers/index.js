@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import count from './count';
+import variables from './variables';
 
 export default combineReducers({
-  count
+  variables
 });

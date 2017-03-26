@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import App from './app';
 import { setVariable, getVariable } from '../../actions/variable_actions';
 
-const mapStateToProps = state => ({
-  count: state.count
+const mapStateToProps = ({variables}) => ({
+  variables
 });
 
 const mapDispatchToProps = dispatch => ({

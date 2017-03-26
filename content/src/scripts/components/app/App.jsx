@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import { Store } from 'react-chrome-redux';
-import { setVariable, getVariable } from '../../actions/variable_actions';
-import { connect } from 'react-redux';
+// import { Store } from 'react-chrome-redux';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.addInputEventListeners = this.addInputEventListeners.bind(this);
     this.sendCorrectAction = this.sendCorrectAction.bind(this);
     this._isArrowPresent = this._isArrowPresent.bind(this);
@@ -15,11 +12,10 @@ class App extends Component {
 
   componentDidMount() {
     this.addInputEventListeners();
-    // document.addEventListener('click', () => {
-    //   this.props.dispatch({
-    //     type: 'ADD_COUNT'
-    //   });
-    // });
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
   }
 
   addInputEventListeners() {
@@ -56,9 +52,9 @@ class App extends Component {
     let splitUpTextWithoutLast = splitUpText.slice(0, splitUpText.length - 1);
 
     if (splitUpTextWithoutLast[0] === "") {
-      this.props.dispatch(setVariable(splitUpTextWithoutLast));
+      this.props.setVariable(splitUpTextWithoutLast);
     } else {
-      this.props.dispatch(getVariable(splitUpTextWithoutLast));
+      this.props.getVariable(splitUpTextWithoutLast);
     }
   }
 
@@ -73,10 +69,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

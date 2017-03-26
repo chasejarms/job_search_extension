@@ -63,11 +63,7 @@
 	
 	var _reactChromeRedux = __webpack_require__(190);
 	
-	var _app = __webpack_require__(237);
-	
-	var _app2 = _interopRequireDefault(_app);
-	
-	var _app_container = __webpack_require__(239);
+	var _app_container = __webpack_require__(237);
 	
 	var _app_container2 = _interopRequireDefault(_app_container);
 	
@@ -82,12 +78,10 @@
 	
 	document.body.insertBefore(anchor, document.body.childNodes[0]);
 	
-	console.log(proxyStore);
-	
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: proxyStore },
-	  _react2.default.createElement(_app2.default, null)
+	  _react2.default.createElement(_app_container2.default, null)
 	), document.getElementById('jobbify-content-anchor'));
 	
 	//
@@ -23201,17 +23195,51 @@
 	  value: true
 	});
 	
+	var _reactRedux = __webpack_require__(160);
+	
+	var _app = __webpack_require__(238);
+	
+	var _app2 = _interopRequireDefault(_app);
+	
+	var _variable_actions = __webpack_require__(239);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(_ref) {
+	  var variables = _ref.variables;
+	  return {
+	    variables: variables
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    setVariable: function setVariable(variableInfo) {
+	      return dispatch((0, _variable_actions.setVariable)(variableInfo));
+	    },
+	    getVariable: function getVariable(variableInfo) {
+	      return dispatch((0, _variable_actions.getVariable)(variableInfo));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_app2.default);
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactChromeRedux = __webpack_require__(190);
-	
-	var _variable_actions = __webpack_require__(238);
-	
-	var _reactRedux = __webpack_require__(160);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23221,6 +23249,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import { Store } from 'react-chrome-redux';
+	
+	
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 	
@@ -23229,7 +23260,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
-	    console.log(props);
 	    _this.addInputEventListeners = _this.addInputEventListeners.bind(_this);
 	    _this.sendCorrectAction = _this.sendCorrectAction.bind(_this);
 	    _this._isArrowPresent = _this._isArrowPresent.bind(_this);
@@ -23240,11 +23270,11 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.addInputEventListeners();
-	      // document.addEventListener('click', () => {
-	      //   this.props.dispatch({
-	      //     type: 'ADD_COUNT'
-	      //   });
-	      // });
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      console.log(this.props);
 	    }
 	  }, {
 	    key: 'addInputEventListeners',
@@ -23283,9 +23313,9 @@
 	      var splitUpTextWithoutLast = splitUpText.slice(0, splitUpText.length - 1);
 	
 	      if (splitUpTextWithoutLast[0] === "") {
-	        this.props.dispatch((0, _variable_actions.setVariable)(splitUpTextWithoutLast));
+	        this.props.setVariable(splitUpTextWithoutLast);
 	      } else {
-	        this.props.dispatch((0, _variable_actions.getVariable)(splitUpTextWithoutLast));
+	        this.props.getVariable(splitUpTextWithoutLast);
 	      }
 	    }
 	  }, {
@@ -23303,16 +23333,10 @@
 	  return App;
 	}(_react.Component);
 	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    count: state.count
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
+	exports.default = App;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23336,45 +23360,6 @@
 	    variableInfo: variableInfo
 	  };
 	};
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(160);
-	
-	var _app = __webpack_require__(237);
-	
-	var _app2 = _interopRequireDefault(_app);
-	
-	var _variable_actions = __webpack_require__(238);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    count: state.count
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    setVariable: function setVariable(variableInfo) {
-	      return dispatch((0, _variable_actions.setVariable)(variableInfo));
-	    },
-	    getVariable: function getVariable(variableInfo) {
-	      return dispatch((0, _variable_actions.getVariable)(variableInfo));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_app2.default);
 
 /***/ }
 /******/ ]);
