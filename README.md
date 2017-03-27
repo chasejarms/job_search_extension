@@ -6,11 +6,11 @@ While each job application is unique and requires a custom approach, most job ap
 
 Jobbify solves this problem with an easy to use Chrome Extension that lets users save blocks of text into variables that are stored in the browser. Simply write what you'd like, add in an arrow (=>) and type the variable name that will represent that block of text. As an example, let's say a particular application asks for your education background. In the applicable input box, you would type:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac accumsan massa. Aenean ac congue nunc. Maecenas volutpat lacus eget felis auctor tincidunt. Cras suscipit vel dui ac pellentesque. Proin at interdum sapien. Aliquam accumsan urna vel quam facilisis, et consectetur tellus finibus. Donec at pellentesque lorem. => education_background
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac accumsan massa. Aenean ac congue nunc. Maecenas volutpat lacus eget felis auctor tincidunt. Cras suscipit vel dui ac pellentesque. Proin at interdum sapien. Aliquam accumsan urna vel quam facilisis, et consectetur tellus finibus. Donec at pellentesque lorem. => education_background
 
 The arrow at the end is important because it tells Jobbify that you're saving the preceding text to the subsequent variable. After hitting tab, the arrow and the variable name are deleted from the input box and the variable is saved in the browser. Now, if you run into a similar situation where you would want to have your education background simply type the following into the appropriate input box:
 
-=> education_background
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> education_background
 
 Upon hitting tab, the information will be automatically placed in the input box, saving you time and allowing you to apply for more jobs in less time, without sacrificing application quality.
 
@@ -32,7 +32,7 @@ The MVP Features for Jobbify are:
 
   This app will be a Chrome Extension that begins listening for tab events when a user activates the app (By activating it in the options). The main popup page will be a search bar that helps you find variables you've saved. A potential additional piece of the visual aspect of this app will be a guided walk-through of how to best use the app.
 
-![wireframes](images/js_wireframe.jpeg)
+![wireframes](docs/job_search.png)
 
 ### Architecture and Technologies
 
