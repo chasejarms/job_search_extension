@@ -20,6 +20,7 @@ class App extends Component {
     //     document.addEventListener('keydown', this.handleTabEvent);
     //   });
     // }
+    console.log("component mounted");
   }
 
   handleTabEvent(e) {
